@@ -1,0 +1,39 @@
+# ~.autotest
+#require 'autotest-growl'
+#require 'snarl'
+#require 'autotest_notification'
+#SPEAKING = false
+#DOOM_EDITION = false
+#BUUF = false
+#PENDING = false
+#STICKY = false
+#SUCCESS_SOUND = ''
+#FAILURE_SOUND = ''
+
+
+#module Autotest::Growl
+ 
+  # Display a message through Snarl.
+#  def self.growl title, message, icon, priority=0, stick=""
+#    image = File.join(ENV['HOME'], '.autotest-growl', "#{icon}.png")
+#    image = File.join(GEM_PATH, 'img', "#{icon}.png") unless File.exists?(image)
+ 
+#	Snarl.show_message(title, message.inspect, image)
+#  end
+ 
+#end
+
+require 'autotest/growl' # enable pop-up windows
+require 'autotest/restart' # optional: forces autotest to pick the changes to this file
+require 'autotest/timestamp' # optional: shows timestamps for test runs
+
+# filter out VCS files and other garbage to reduce HDD usage
+Autotest.add_hook :initialize do |autotest|
+  %w{.git .svn .hg .DS_Store ._* vendor tmp log doc}.each do |exception|
+    autotest.add_exception(exception)
+  end
+end
+
+# do not clear console before running tests
+Autotest::Growl::clear_terminal = false
+

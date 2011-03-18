@@ -12,8 +12,11 @@ group :development do
 end
 
 group :test do
+	gem 'ZenTest'
 	gem 'rspec'
 	gem 'webrat'
+	gem 'spork', '0.9.0.rc4'
+	gem 'rspec-rails'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
